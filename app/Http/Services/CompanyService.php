@@ -8,7 +8,6 @@ use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Carbon\Carbon;
 use Exception;
-use PhpParser\Node\Stmt\Catch_;
 
 class CompanyService extends Controller
 {
