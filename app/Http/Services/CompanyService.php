@@ -54,14 +54,17 @@ class CompanyService extends Controller
 
     public function destroy(Company $company)
     {
-        $now =Carbon::now();
-        $now = $now->toDateTimeString();
-        $company->update(
-            [
-            "id"=>$company->id,
-            "deleted_at"=>$now,
-            ]
-        );
-        return response()->noContent();
+        try{
+            $this->company->beginTransaction();
+            $company->softDelete($company);
+            $this->company->commit();
+            return $this->sendResponse("company delete success");
+        }catch(Exception $e){
+            $this->company->rollback();
+            return $this->sendError($e->getMessage());
+        }
+
+
+       
     }
 }

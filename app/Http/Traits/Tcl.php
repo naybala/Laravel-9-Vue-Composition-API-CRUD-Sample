@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Traits;
+
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 trait Tcl{
@@ -28,9 +30,16 @@ trait Tcl{
         DB::commit();
     }
 
-    public function delete()
+    public function softDelete($model):void
     {
-        
+        $now =Carbon::now();
+        $now = $now->toDateTimeString();
+        $model->update(
+            [
+            "id"=>$model->id,
+            "deleted_at"=>$now,
+            ]
+        );
     }
 
 }
