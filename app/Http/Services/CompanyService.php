@@ -41,8 +41,15 @@ class CompanyService extends Controller
 
     public function update(CompanyRequest $request, Company $company)
     {
-        $company->update($request->validated());
-        return new CompanyResource($company);
+        try{
+            $this->company->beginTransaction();
+            $company->update($request->validated());
+            $this->company->commit();
+            return new CompanyResource($company);
+        }catch(Exception $e){
+            $this->company->rollback();
+            return $this->sendError($e->getMessage());
+        }
     }
 
     public function destroy(Company $company)

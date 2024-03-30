@@ -28,4 +28,9 @@ trait Tcl{
         DB::commit();
     }
 
+    public function delete()
+    {
+        
+    }
+
 }
