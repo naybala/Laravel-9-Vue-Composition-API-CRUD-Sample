@@ -3,7 +3,6 @@
 namespace App\Http\Services;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Carbon\Carbon;
@@ -21,11 +20,11 @@ class CompanyService extends Controller
         return CompanyResource::collection($this->company::all());
     }
 
-    public function store(CompanyRequest $request)
+    public function store($request)
     {
         try{
             $this->company->beginTransaction();
-            $company = $this->company->create($request->validated());
+            $company = $this->company->create($request);
             $this->company->commit();
             return new CompanyResource($company);
         }catch(Exception $e){
@@ -39,11 +38,11 @@ class CompanyService extends Controller
         return new CompanyResource($company);
     }
 
-    public function update(CompanyRequest $request, Company $company)
+    public function update($request, Company $company)
     {
         try{
             $this->company->beginTransaction();
-            $company->update($request->validated());
+            $company->update($request);
             $this->company->commit();
             return new CompanyResource($company);
         }catch(Exception $e){

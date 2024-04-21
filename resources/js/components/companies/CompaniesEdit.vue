@@ -35,9 +35,8 @@
                            v-model="company.address">
                 </div>
             </div>
-
             <div>
-                <label for="website" class="block text-sm font-medium text-gray-700">Website</label>
+                <CommonLabel for="website" title="Website"></CommonLabel>
                 <div class="mt-1">
                     <input type="text" name="website" id="website"
                            class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -46,16 +45,18 @@
             </div>
         </div>
 
-        <button type="submit"
-                class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-white uppercase bg-gray-800 rounded-md border border-transparent ring-gray-300 transition duration-150 ease-in-out hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring disabled:opacity-25">
-            Save
-        </button>
+        <SubmitBtn title="Update"></SubmitBtn>
+
     </form>
 </template>
 
 <script setup>
 import useCompanies from "@/composables/companies";
 import { onMounted } from "vue";
+import SubmitBtn from "../common/SubmitBtn.vue";
+import CommonLabel from "../common/CommonLabel.vue";
+import CommonInput from "../common/CommonInput.vue";
+
 
 const { errors, company, getCompany, updateCompany } = useCompanies()
 const props = defineProps({
