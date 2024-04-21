@@ -62,9 +62,6 @@ class CompanyService extends Controller
         }catch(Exception $e){
             $this->company->rollback();
             return $this->sendError($e->getMessage());
-        }
-
-
-       
+        }  
     }
 }
